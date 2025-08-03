@@ -116,18 +116,104 @@ func getIlceListesi(stateID string) ([]Ilce, error) {
 }
 
 // Türkiye verilerini JSON dosyasından yükle
+// Embedded Turkey data
+var embeddedTurkeyData = TurkeyData{
+	Ulke: struct {
+		ID    string `json:"id"`
+		Adi   string `json:"adi"`
+		AdiEn string `json:"adiEn"`
+	}{
+		ID:    "2",
+		Adi:   "Türkiye",
+		AdiEn: "Turkey",
+	},
+	Iller: []Il{
+		{ID: "500", Adi: "ADANA", AdiEn: "ADANA"},
+		{ID: "501", Adi: "ADIYAMAN", AdiEn: "ADIYAMAN"},
+		{ID: "502", Adi: "AFYONKARAHİSAR", AdiEn: "AFYONKARAHISAR"},
+		{ID: "503", Adi: "AĞRI", AdiEn: "AGRI"},
+		{ID: "504", Adi: "AKSARAY", AdiEn: "AKSARAY"},
+		{ID: "505", Adi: "AMASYA", AdiEn: "AMASYA"},
+		{ID: "506", Adi: "ANKARA", AdiEn: "ANKARA"},
+		{ID: "507", Adi: "ANTALYA", AdiEn: "ANTALYA"},
+		{ID: "508", Adi: "ARDAHAN", AdiEn: "ARDAHAN"},
+		{ID: "509", Adi: "ARTVİN", AdiEn: "ARTVIN"},
+		{ID: "510", Adi: "AYDIN", AdiEn: "AYDIN"},
+		{ID: "511", Adi: "BALIKESİR", AdiEn: "BALIKESIR"},
+		{ID: "512", Adi: "BARTIN", AdiEn: "BARTIN"},
+		{ID: "513", Adi: "BATMAN", AdiEn: "BATMAN"},
+		{ID: "514", Adi: "BAYBURT", AdiEn: "BAYBURT"},
+		{ID: "515", Adi: "BİLECİK", AdiEn: "BILECIK"},
+		{ID: "516", Adi: "BİNGÖL", AdiEn: "BINGOL"},
+		{ID: "517", Adi: "BİTLİS", AdiEn: "BITLIS"},
+		{ID: "518", Adi: "BOLU", AdiEn: "BOLU"},
+		{ID: "519", Adi: "BURDUR", AdiEn: "BURDUR"},
+		{ID: "520", Adi: "BURSA", AdiEn: "BURSA"},
+		{ID: "521", Adi: "ÇANAKKALE", AdiEn: "CANAKKALE"},
+		{ID: "522", Adi: "ÇANKIRI", AdiEn: "CANKIRI"},
+		{ID: "523", Adi: "ÇORUM", AdiEn: "CORUM"},
+		{ID: "524", Adi: "DENİZLİ", AdiEn: "DENIZLI"},
+		{ID: "525", Adi: "DİYARBAKIR", AdiEn: "DIYARBAKIR"},
+		{ID: "526", Adi: "DÜZCE", AdiEn: "DUZCE"},
+		{ID: "527", Adi: "EDİRNE", AdiEn: "EDIRNE"},
+		{ID: "528", Adi: "ELAZIĞ", AdiEn: "ELAZIG"},
+		{ID: "529", Adi: "ERZİNCAN", AdiEn: "ERZINCAN"},
+		{ID: "530", Adi: "ERZURUM", AdiEn: "ERZURUM"},
+		{ID: "531", Adi: "ESKİŞEHİR", AdiEn: "ESKISEHIR"},
+		{ID: "532", Adi: "GAZİANTEP", AdiEn: "GAZIANTEP"},
+		{ID: "533", Adi: "GİRESUN", AdiEn: "GIRESUN"},
+		{ID: "534", Adi: "GÜMÜŞHANE", AdiEn: "GUMUSHANE"},
+		{ID: "535", Adi: "HAKKARİ", AdiEn: "HAKKARI"},
+		{ID: "536", Adi: "HATAY", AdiEn: "HATAY"},
+		{ID: "537", Adi: "IĞDIR", AdiEn: "IGDIR"},
+		{ID: "538", Adi: "ISPARTA", AdiEn: "ISPARTA"},
+		{ID: "539", Adi: "İSTANBUL", AdiEn: "ISTANBUL"},
+		{ID: "540", Adi: "İZMİR", AdiEn: "IZMIR"},
+		{ID: "541", Adi: "KAHRAMANMARAŞ", AdiEn: "KAHRAMANMARAS"},
+		{ID: "542", Adi: "KARABÜK", AdiEn: "KARABUK"},
+		{ID: "543", Adi: "KARAMAN", AdiEn: "KARAMAN"},
+		{ID: "544", Adi: "KARS", AdiEn: "KARS"},
+		{ID: "545", Adi: "KASTAMONU", AdiEn: "KASTAMONU"},
+		{ID: "546", Adi: "KAYSERİ", AdiEn: "KAYSERI"},
+		{ID: "547", Adi: "KİLİS", AdiEn: "KILIS"},
+		{ID: "548", Adi: "KIRIKKALE", AdiEn: "KIRIKKALE"},
+		{ID: "549", Adi: "KIRKLARELİ", AdiEn: "KIRKLARELI"},
+		{ID: "550", Adi: "KIRŞEHİR", AdiEn: "KIRSEHIR"},
+		{ID: "551", Adi: "KOCAELİ", AdiEn: "KOCAELI"},
+		{ID: "552", Adi: "KONYA", AdiEn: "KONYA"},
+		{ID: "553", Adi: "KÜTAHYA", AdiEn: "KUTAHYA"},
+		{ID: "554", Adi: "MALATYA", AdiEn: "MALATYA"},
+		{ID: "555", Adi: "MANİSA", AdiEn: "MANISA"},
+		{ID: "556", Adi: "MARDİN", AdiEn: "MARDIN"},
+		{ID: "557", Adi: "MERSİN", AdiEn: "MERSIN"},
+		{ID: "558", Adi: "MUĞLA", AdiEn: "MUGLA"},
+		{ID: "559", Adi: "MUŞ", AdiEn: "MUS"},
+		{ID: "560", Adi: "NEVŞEHİR", AdiEn: "NEVSEHIR"},
+		{ID: "561", Adi: "NİĞDE", AdiEn: "NIGDE"},
+		{ID: "562", Adi: "ORDU", AdiEn: "ORDU"},
+		{ID: "563", Adi: "OSMANİYE", AdiEn: "OSMANIYE"},
+		{ID: "564", Adi: "RİZE", AdiEn: "RIZE"},
+		{ID: "565", Adi: "SAKARYA", AdiEn: "SAKARYA"},
+		{ID: "566", Adi: "SAMSUN", AdiEn: "SAMSUN"},
+		{ID: "567", Adi: "ŞANLIURFA", AdiEn: "SANLIURFA"},
+		{ID: "568", Adi: "SİİRT", AdiEn: "SIIRT"},
+		{ID: "569", Adi: "SİNOP", AdiEn: "SINOP"},
+		{ID: "570", Adi: "ŞIRNAK", AdiEn: "SIRNAK"},
+		{ID: "571", Adi: "SİVAS", AdiEn: "SIVAS"},
+		{ID: "572", Adi: "TEKİRDAĞ", AdiEn: "TEKIRDAG"},
+		{ID: "573", Adi: "TOKAT", AdiEn: "TOKAT"},
+		{ID: "574", Adi: "TRABZON", AdiEn: "TRABZON"},
+		{ID: "575", Adi: "TUNCELİ", AdiEn: "TUNCELI"},
+		{ID: "576", Adi: "UŞAK", AdiEn: "USAK"},
+		{ID: "577", Adi: "VAN", AdiEn: "VAN"},
+		{ID: "578", Adi: "YALOVA", AdiEn: "YALOVA"},
+		{ID: "579", Adi: "YOZGAT", AdiEn: "YOZGAT"},
+		{ID: "580", Adi: "ZONGULDAK", AdiEn: "ZONGULDAK"},
+	},
+}
+
 func loadTurkeyData() (*TurkeyData, error) {
-	data, err := os.ReadFile("data/turkey.json")
-	if err != nil {
-		return nil, fmt.Errorf("JSON dosyası okunamadı: %v", err)
-	}
-
-	var turkeyData TurkeyData
-	if err := json.Unmarshal(data, &turkeyData); err != nil {
-		return nil, fmt.Errorf("JSON parse hatası: %v", err)
-	}
-
-	return &turkeyData, nil
+	return &embeddedTurkeyData, nil
 }
 
 // İl adından ID bul
