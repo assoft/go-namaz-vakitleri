@@ -547,12 +547,12 @@ func listIller() error {
 		return fmt.Errorf("Türkiye verileri yüklenemedi: %v", err)
 	}
 
-	fmt.Println("🏛️ Türkiye İlleri:")
-	fmt.Println(strings.Repeat("=", 50))
-
-	for i, il := range turkeyData.Iller {
-		fmt.Printf("%3d. %s (ID: %s)\n", i+1, il.Adi, il.ID)
+	// JSON çıktısını stdout'a yazdır (minify)
+	jsonData, err := json.Marshal(turkeyData)
+	if err != nil {
+		return fmt.Errorf("JSON marshal hatası: %v", err)
 	}
+	fmt.Println(string(jsonData))
 
 	return nil
 }
