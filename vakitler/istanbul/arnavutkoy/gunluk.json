@@ -1,0 +1,34 @@
+{
+  "il": "İSTANBUL",
+  "il_id": "539",
+  "ilce": "ARNAVUTKOY",
+  "ilce_id": "9535",
+  "vakit_tipi": "gunluk",
+  "tarih": "2025-08-03",
+  "gunluk_vakitler": [
+    {
+      "VakitAdi": "İmsak",
+      "Vakit": "04:12"
+    },
+    {
+      "VakitAdi": "Güneş",
+      "Vakit": "05:55"
+    },
+    {
+      "VakitAdi": "Öğle",
+      "Vakit": "13:16"
+    },
+    {
+      "VakitAdi": "İkindi",
+      "Vakit": "17:10"
+    },
+    {
+      "VakitAdi": "Akşam",
+      "Vakit": "20:27"
+    },
+    {
+      "VakitAdi": "Yatsı",
+      "Vakit": "22:04"
+    }
+  ]
+}

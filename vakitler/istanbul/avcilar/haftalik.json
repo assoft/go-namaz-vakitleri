@@ -1,0 +1,225 @@
+{
+  "il": "İSTANBUL",
+  "il_id": "539",
+  "ilce": "AVCILAR",
+  "ilce_id": "17865",
+  "vakit_tipi": "haftalik",
+  "tarih": "2025-08-03",
+  "haftalik_vakitler": [
+    {
+      "tarih": "03 Ağustos 2025 Pazar",
+      "hicriTarih": "9 Safer 1447",
+      "vakitler": [
+        {
+          "VakitAdi": "İmsak",
+          "Vakit": "04:13"
+        },
+        {
+          "VakitAdi": "Güneş",
+          "Vakit": "05:56"
+        },
+        {
+          "VakitAdi": "Öğle",
+          "Vakit": "13:16"
+        },
+        {
+          "VakitAdi": "İkindi",
+          "Vakit": "17:10"
+        },
+        {
+          "VakitAdi": "Akşam",
+          "Vakit": "20:27"
+        },
+        {
+          "VakitAdi": "Yatsı",
+          "Vakit": "22:03"
+        }
+      ]
+    },
+    {
+      "tarih": "04 Ağustos 2025 Pazartesi",
+      "hicriTarih": "10 Safer 1447",
+      "vakitler": [
+        {
+          "VakitAdi": "İmsak",
+          "Vakit": "04:14"
+        },
+        {
+          "VakitAdi": "Güneş",
+          "Vakit": "05:57"
+        },
+        {
+          "VakitAdi": "Öğle",
+          "Vakit": "13:16"
+        },
+        {
+          "VakitAdi": "İkindi",
+          "Vakit": "17:10"
+        },
+        {
+          "VakitAdi": "Akşam",
+          "Vakit": "20:26"
+        },
+        {
+          "VakitAdi": "Yatsı",
+          "Vakit": "22:01"
+        }
+      ]
+    },
+    {
+      "tarih": "05 Ağustos 2025 Salı",
+      "hicriTarih": "11 Safer 1447",
+      "vakitler": [
+        {
+          "VakitAdi": "İmsak",
+          "Vakit": "04:16"
+        },
+        {
+          "VakitAdi": "Güneş",
+          "Vakit": "05:58"
+        },
+        {
+          "VakitAdi": "Öğle",
+          "Vakit": "13:16"
+        },
+        {
+          "VakitAdi": "İkindi",
+          "Vakit": "17:09"
+        },
+        {
+          "VakitAdi": "Akşam",
+          "Vakit": "20:24"
+        },
+        {
+          "VakitAdi": "Yatsı",
+          "Vakit": "21:59"
+        }
+      ]
+    },
+    {
+      "tarih": "06 Ağustos 2025 \u0026#199;arşamba",
+      "hicriTarih": "12 Safer 1447",
+      "vakitler": [
+        {
+          "VakitAdi": "İmsak",
+          "Vakit": "04:17"
+        },
+        {
+          "VakitAdi": "Güneş",
+          "Vakit": "05:59"
+        },
+        {
+          "VakitAdi": "Öğle",
+          "Vakit": "13:16"
+        },
+        {
+          "VakitAdi": "İkindi",
+          "Vakit": "17:09"
+        },
+        {
+          "VakitAdi": "Akşam",
+          "Vakit": "20:23"
+        },
+        {
+          "VakitAdi": "Yatsı",
+          "Vakit": "21:58"
+        }
+      ]
+    },
+    {
+      "tarih": "07 Ağustos 2025 Perşembe",
+      "hicriTarih": "13 Safer 1447",
+      "vakitler": [
+        {
+          "VakitAdi": "İmsak",
+          "Vakit": "04:19"
+        },
+        {
+          "VakitAdi": "Güneş",
+          "Vakit": "06:00"
+        },
+        {
+          "VakitAdi": "Öğle",
+          "Vakit": "13:16"
+        },
+        {
+          "VakitAdi": "İkindi",
+          "Vakit": "17:08"
+        },
+        {
+          "VakitAdi": "Akşam",
+          "Vakit": "20:22"
+        },
+        {
+          "VakitAdi": "Yatsı",
+          "Vakit": "21:56"
+        }
+      ]
+    },
+    {
+      "tarih": "08 Ağustos 2025 Cuma",
+      "hicriTarih": "14 Safer 1447",
+      "vakitler": [
+        {
+          "VakitAdi": "İmsak",
+          "Vakit": "04:20"
+        },
+        {
+          "VakitAdi": "Güneş",
+          "Vakit": "06:01"
+        },
+        {
+          "VakitAdi": "Öğle",
+          "Vakit": "13:16"
+        },
+        {
+          "VakitAdi": "İkindi",
+          "Vakit": "17:08"
+        },
+        {
+          "VakitAdi": "Akşam",
+          "Vakit": "20:21"
+        },
+        {
+          "VakitAdi": "Yatsı",
+          "Vakit": "21:54"
+        }
+      ]
+    },
+    {
+      "tarih": "09 Ağustos 2025 Cumartesi",
+      "hicriTarih": "15 Safer 1447",
+      "vakitler": [
+        {
+          "VakitAdi": "İmsak",
+          "Vakit": "04:22"
+        },
+        {
+          "VakitAdi": "Güneş",
+          "Vakit": "06:02"
+        },
+        {
+          "VakitAdi": "Öğle",
+          "Vakit": "13:16"
+        },
+        {
+          "VakitAdi": "İkindi",
+          "Vakit": "17:07"
+        },
+        {
+          "VakitAdi": "Akşam",
+          "Vakit": "20:20"
+        },
+        {
+          "VakitAdi": "Yatsı",
+          "Vakit": "21:53"
+        }
+      ]
+    }
+  ],
+  "istatistikler": {
+    "ilk_tarih": "03 Ağustos 2025 Pazar",
+    "son_tarih": "09 Ağustos 2025 Cumartesi",
+    "toplam_gun": 7
+  }
+}
