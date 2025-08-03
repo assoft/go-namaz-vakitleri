@@ -394,8 +394,6 @@ func parseNamazVakitleri(html string) []GunlukVakitler {
 
 // Ana fonksiyon
 func run(stateID, ilceID, vakitTipiStr, jsonFile string) error {
-	fmt.Println("🕌 Diyanet Namaz Vakitleri Uygulaması")
-	fmt.Println(strings.Repeat("=", 50))
 
 	// Türkiye verilerini yükle
 	turkeyData, err := loadTurkeyData()
@@ -409,10 +407,7 @@ func run(stateID, ilceID, vakitTipiStr, jsonFile string) error {
 		return fmt.Errorf("il bulunamadı: %v", err)
 	}
 
-	fmt.Printf("🏛️ Seçilen İl: %s (ID: %s)\n", ilAdi, stateID)
-
 	// İlçe listesini al
-	fmt.Println("📋 İlçeler alınıyor...")
 	ilceler, err := getIlceListesi(stateID)
 	if err != nil {
 		return fmt.Errorf("ilçe listesi alınamadı: %v", err)
@@ -420,11 +415,6 @@ func run(stateID, ilceID, vakitTipiStr, jsonFile string) error {
 
 	if len(ilceler) == 0 {
 		return fmt.Errorf("ilçe listesi boş")
-	}
-
-	fmt.Printf("✅ %d ilçe bulundu:\n", len(ilceler))
-	for i, ilce := range ilceler {
-		fmt.Printf("%d. %s (ID: %s)\n", i+1, ilce.IlceAdi, ilce.IlceID)
 	}
 
 	// Vakit tipini belirle
@@ -454,11 +444,15 @@ func run(stateID, ilceID, vakitTipiStr, jsonFile string) error {
 			return fmt.Errorf("belirtilen ilçe ID'si bulunamadı: %s", ilceID)
 		}
 	} else {
-		// Varsayılan olarak ilk ilçe
-		secilenIlce = ilceler[0]
+		// Varsayılan olarak merkez ilçeyi bul (il adıyla aynı olan)
+		secilenIlce = ilceler[0] // fallback olarak ilk ilçe
+		for _, ilce := range ilceler {
+			if strings.EqualFold(ilce.IlceAdi, ilAdi) {
+				secilenIlce = ilce
+				break
+			}
+		}
 	}
-
-	fmt.Printf("\n🕐 %s için namaz vakitleri alınıyor...\n", secilenIlce.IlceAdi)
 
 	html, err := getNamazVakitleriHTML(secilenIlce.IlceID)
 	if err != nil {
@@ -487,13 +481,6 @@ func run(stateID, ilceID, vakitTipiStr, jsonFile string) error {
 	case Gunluk:
 		sonuc.GunlukVakitler = gunlukVakitler
 
-		// Konsol çıktısı
-		fmt.Printf("\n📅 %s - Bugünün Namaz Vakitleri:\n", secilenIlce.IlceAdi)
-		fmt.Println(strings.Repeat("=", 40))
-		for _, vakit := range gunlukVakitler {
-			fmt.Printf("   🕌 %s: %s\n", vakit.VakitAdi, vakit.Vakit)
-		}
-
 	case Haftalik:
 		haftalikVakitler := parseNamazVakitleri(html)
 		if len(haftalikVakitler) > 0 {
@@ -503,17 +490,6 @@ func run(stateID, ilceID, vakitTipiStr, jsonFile string) error {
 				buHafta = haftalikVakitler[:7]
 			}
 			sonuc.HaftalikVakitler = buHafta
-
-			// Konsol çıktısı
-			fmt.Printf("\n📆 %s - Bu Haftanın Namaz Vakitleri:\n", secilenIlce.IlceAdi)
-			fmt.Println(strings.Repeat("=", 50))
-
-			for _, gun := range buHafta {
-				fmt.Printf("\n📅 %s (%s):\n", gun.Tarih, gun.HicriTarih)
-				for _, vakit := range gun.Vakitler {
-					fmt.Printf("   %s: %s\n", vakit.VakitAdi, vakit.Vakit)
-				}
-			}
 
 			// İstatistikler
 			sonuc.Istatistikler = map[string]interface{}{
@@ -528,25 +504,23 @@ func run(stateID, ilceID, vakitTipiStr, jsonFile string) error {
 		if len(yillikVakitler) > 0 {
 			sonuc.YillikVakitler = yillikVakitler
 
-			// Konsol çıktısı
-			fmt.Printf("\n📅 %s - Yıllık Namaz Vakitleri:\n", secilenIlce.IlceAdi)
-			fmt.Printf("✅ %d günlük vakit bulundu\n", len(yillikVakitler))
-
 			// İstatistikler
 			sonuc.Istatistikler = map[string]interface{}{
 				"toplam_gun": len(yillikVakitler),
 				"ilk_tarih":  yillikVakitler[0].Tarih,
 				"son_tarih":  yillikVakitler[len(yillikVakitler)-1].Tarih,
 			}
-
-			fmt.Println("\n📊 İstatistikler:")
-			fmt.Printf("   • Toplam gün sayısı: %d\n", len(yillikVakitler))
-			fmt.Printf("   • İlk tarih: %s\n", yillikVakitler[0].Tarih)
-			fmt.Printf("   • Son tarih: %s\n", yillikVakitler[len(yillikVakitler)-1].Tarih)
 		}
 	}
 
-	// JSON dosyasına kaydet
+	// JSON çıktısını stdout'a yazdır (minify)
+	jsonData, err := json.Marshal(sonuc)
+	if err != nil {
+		return fmt.Errorf("JSON marshal hatası: %v", err)
+	}
+	fmt.Println(string(jsonData))
+
+	// JSON dosyasına kaydet (eğer belirtilmişse)
 	if jsonFile != "" {
 		// Otomatik dosya yolu oluştur
 		if jsonFile == "auto" {
@@ -558,16 +532,9 @@ func run(stateID, ilceID, vakitTipiStr, jsonFile string) error {
 			return fmt.Errorf("klasör oluşturulamadı: %v", err)
 		}
 
-		jsonData, err := json.MarshalIndent(sonuc, "", "  ")
-		if err != nil {
-			return fmt.Errorf("JSON marshal hatası: %v", err)
-		}
-
 		if err := os.WriteFile(jsonFile, jsonData, 0644); err != nil {
 			return fmt.Errorf("JSON dosyası yazılamadı: %v", err)
 		}
-
-		fmt.Printf("\n💾 Sonuçlar %s dosyasına kaydedildi\n", jsonFile)
 	}
 
 	return nil
